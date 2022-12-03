@@ -1,0 +1,3 @@
+class UserDisconnection < ApplicationRecord
+  
+end
