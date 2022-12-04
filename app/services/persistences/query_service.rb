@@ -25,6 +25,7 @@ module Persistences
       def get_friend_sleep_records(friend_user_id)
         UserSleepLengthRecord
           .where(click_in_user_id: friend_user_id)
+          .where("record_date > ?", Date.today - 7.days)
           .order(sleep_seconds: :desc)
           .as_json(only: [:record_date, :sleep_seconds])
       end
