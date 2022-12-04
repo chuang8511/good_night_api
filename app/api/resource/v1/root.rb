@@ -8,6 +8,7 @@ module Resource::V1
 
     mount Resource::V1::ClickInOperationApi
     mount Resource::V1::ClickInUsersApi
+    mount Resource::V1::FriendRecordsApi
   end
 
 end
