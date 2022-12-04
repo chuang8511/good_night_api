@@ -5,5 +5,6 @@ class CreateUserDisconnections < ActiveRecord::Migration[5.2]
 
       t.timestamps :null => false
     end
+    add_index :user_disconnections, :user_connection_id, unique: true
   end
 end

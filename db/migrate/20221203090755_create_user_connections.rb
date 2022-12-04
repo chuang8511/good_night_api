@@ -6,5 +6,6 @@ class CreateUserConnections < ActiveRecord::Migration[5.2]
 
       t.timestamps :null => false
     end
+    add_index :user_connections, :click_in_user_id
   end
 end

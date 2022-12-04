@@ -7,5 +7,6 @@ class CreateClickInRecords < ActiveRecord::Migration[5.2]
 
       t.timestamps :null => false
     end
+    add_index :click_in_records, :click_in_user_id
   end
 end
