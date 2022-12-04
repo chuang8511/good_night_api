@@ -8,11 +8,22 @@ class CommandService
 
       sleep_length = get_sleep_length(click_type_integer, click_time, response)
 
-      Persistences::Repository.save_click_time(user_id, click_type_integer, click_time, sleep_length)
+      Repository.save_click_time(user_id, click_type_integer, click_time, sleep_length)
+    end
+
+    def follow_user(user_id, follow_user_id)
+      data = Repository.follow_user(user_id, follow_user_id)
+      return data.id
+    end
+
+    def unfollow_user(connection_id)
+      Repository.unfollow_user(connection_id)
     end
 
 
     private
+
+    Repository = Persistences::Repository
 
     def get_click_type(click_type)
       return 1 if click_type == "wake_up"
