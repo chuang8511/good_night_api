@@ -17,6 +17,8 @@
   - User can see the friend-list to select whose sleep records he/she is going to check.
   - User can see a specific friend's sleep records.
 
+* You can check the path, action, and params in all specs easily.
+
 ### Tech side questions you may ask
 1. Why grape?
 - Lighter than Rails API
