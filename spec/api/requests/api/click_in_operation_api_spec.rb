@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe Resource::V1::ClickInOperationApi, type: :request do
 
-  # todo: write the expectation for invalid request (4XX, 5XX)
   describe 'click_in API' do
     before do
       allow(CommandService).to receive(:save_click_time).and_return(true)
@@ -70,7 +69,6 @@ RSpec.describe Resource::V1::ClickInOperationApi, type: :request do
       end
 
       describe 'check response' do
-
         before { call_api }
 
         it 'responds click-in histories' do
@@ -85,7 +83,25 @@ RSpec.describe Resource::V1::ClickInOperationApi, type: :request do
       end
 
     end
+  end
 
+  describe 'check abnormal pattern' do
+
+    context 'failure response with wrong user_id' do
+
+      before { post '/good_night/v1/click_in/', :params => { user_id: "wrong_type", click_type: "wake_up" } }
+
+      it_behaves_like 'return http_status_code', 400
+      it_behaves_like 'return error_message', "user_id is invalid"
+    end
+
+    context 'failure response with wrong click_type' do
+
+      before { post '/good_night/v1/click_in/', :params => { user_id: 1, click_type: 1 } }
+
+      it_behaves_like 'return http_status_code', 400
+      it_behaves_like 'return error_message', "click_type does not have a valid value"
+    end
 
   end
 
