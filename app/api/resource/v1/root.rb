@@ -6,6 +6,7 @@ module Resource::V1
     content_type :json, 'application/json'
 
 
+    mount Resource::V1::ClickInOperationApi
   end
 
 end
