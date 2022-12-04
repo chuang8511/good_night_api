@@ -1,4 +1,3 @@
-# test github protections
 module Persistences
   class Repository
 
