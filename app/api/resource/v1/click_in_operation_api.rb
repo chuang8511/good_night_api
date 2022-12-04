@@ -33,10 +33,6 @@ module Resource::V1
 
       end
 
-      get do
-        present QueryService.get_user_click_histories(1)
-      end
-
       # todo: add specific time click-in API
 
 

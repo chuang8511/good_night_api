@@ -7,6 +7,7 @@ module Resource::V1
 
 
     mount Resource::V1::ClickInOperationApi
+    mount Resource::V1::ClickInUsersApi
   end
 
 end

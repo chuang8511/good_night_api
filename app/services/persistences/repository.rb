@@ -17,8 +17,17 @@ module Persistences
         end
       end
 
-    end
+      def follow_user(user_id, follow_user_id)
+        UserConnection.create!(click_in_user_id: user_id,
+                               followed_user_id: follow_user_id)
+      end
 
+      def unfollow_user(connection_id)
+        UserDisconnection.create!(user_connection_id: connection_id)
+        true
+      end
+
+    end
 
   end
 end
