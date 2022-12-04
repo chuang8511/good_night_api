@@ -28,18 +28,18 @@ RSpec.describe Resource::V1::ClickInOperationApi, type: :request do
 
       end
 
-      it 'responds click-in histories' do
-        call_api
-        body = JSON.parse(response.body)
-        expect(body[0]["click_type"]).to eq("wake_up")
-        expect(body[0]["recorded_time"].to_time.strftime("%Y-%m-%d %H:%M:%S")).to eq("2022-12-01 14:00:00")
-        expect(body[1]).to eq(nil)
-      end
+      describe 'check response' do
 
-      it 'respond 201' do
-        call_api
-        expect(response.status).to eq 201
+        before { call_api }
 
+        it 'responds click-in histories' do
+          body = JSON.parse(response.body)
+          expect(body[0]["click_type"]).to eq("wake_up")
+          expect(body[0]["recorded_time"].to_time.strftime("%Y-%m-%d %H:%M:%S")).to eq("2022-12-01 14:00:00")
+          expect(body[1]).to eq(nil)
+        end
+
+        it_behaves_like 'return http_status_code', 201
       end
 
 
@@ -69,19 +69,19 @@ RSpec.describe Resource::V1::ClickInOperationApi, type: :request do
 
       end
 
-      it 'responds click-in histories' do
-        call_api
-        body = JSON.parse(response.body)
-        expect(body[0]["click_type"]).to eq("wake_up")
-        expect(body[0]["recorded_time"].to_time.strftime("%Y-%m-%d %H:%M:%S")).to eq("2022-12-01 14:00:00")
-        expect(body[1]["click_type"]).to eq("go_to_sleep")
-        expect(body[1]["recorded_time"].to_time.strftime("%Y-%m-%d %H:%M:%S")).to eq("2022-12-01 14:00:00")
-      end
+      describe 'check response' do
 
-      it 'respond 201' do
-        call_api
-        expect(response.status).to eq 201
+        before { call_api }
 
+        it 'responds click-in histories' do
+          body = JSON.parse(response.body)
+          expect(body[0]["click_type"]).to eq("wake_up")
+          expect(body[0]["recorded_time"].to_time.strftime("%Y-%m-%d %H:%M:%S")).to eq("2022-12-01 14:00:00")
+          expect(body[1]["click_type"]).to eq("go_to_sleep")
+          expect(body[1]["recorded_time"].to_time.strftime("%Y-%m-%d %H:%M:%S")).to eq("2022-12-01 14:00:00")
+        end
+
+        it_behaves_like 'return http_status_code', 201
       end
 
     end
