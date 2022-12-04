@@ -31,6 +31,16 @@ RSpec.describe Resource::V1::FriendRecordsApi, type: :request do
 
   end
 
+  describe 'check abnormal pattern for get friends API' do
+
+    before { get '/good_night/v1/click_in_user_friend/friends', :params => { user_id: "wrong_type" } }
+
+    it_behaves_like 'return http_status_code', 400
+    it_behaves_like 'return error_message', "user_id is invalid"
+
+  end
+
+
 
 
   describe 'Call get friend_records' do
@@ -60,6 +70,15 @@ RSpec.describe Resource::V1::FriendRecordsApi, type: :request do
 
       it_behaves_like 'return http_status_code', 200
     end
+
+  end
+
+  describe 'check abnormal pattern for get friend_records API' do
+
+    before { get '/good_night/v1/click_in_user_friend/records', :params => { friend_user_id: "wrong_type" } }
+
+    it_behaves_like 'return http_status_code', 400
+    it_behaves_like 'return error_message', "friend_user_id is invalid"
 
   end
 

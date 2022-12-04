@@ -24,6 +24,26 @@ RSpec.describe Resource::V1::ClickInUsersApi, type: :request do
 
   end
 
+  describe 'check abnormal pattern for follow API' do
+
+    context 'failure response with wrong user_id' do
+
+      before { post '/good_night/v1/click_in_user/follow', :params => { user_id: "wrong_type", follow_user_id: 1 } }
+
+      it_behaves_like 'return http_status_code', 400
+      it_behaves_like 'return error_message', "user_id is invalid"
+    end
+
+    context 'failure response with wrong follow_user_id' do
+
+      before { post '/good_night/v1/click_in_user/follow', :params => { user_id: 1, follow_user_id: "wrong_type" } }
+
+      it_behaves_like 'return http_status_code', 400
+      it_behaves_like 'return error_message', "follow_user_id is invalid"
+    end
+
+  end
+
 
   describe 'call unfollow API' do
     before { allow(CommandService).to receive(:unfollow_user).and_return(true) }
@@ -44,6 +64,15 @@ RSpec.describe Resource::V1::ClickInUsersApi, type: :request do
 
       it_behaves_like 'return http_status_code', 201
     end
+
+  end
+
+  describe 'check abnormal pattern for unfollow API' do
+
+    before { post '/good_night/v1/click_in_user/unfollow', :params => { connection_id: "wrong_type" } }
+
+    it_behaves_like 'return http_status_code', 400
+    it_behaves_like 'return error_message', "connection_id is invalid"
 
   end
 

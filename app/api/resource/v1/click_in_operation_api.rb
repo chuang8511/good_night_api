@@ -6,7 +6,7 @@ module Resource::V1
 
       params do
         requires :user_id, type: Integer
-        requires :click_type, type: String, desc: 'wake up or sleep'
+        requires :click_type, type: String, values: ["wake_up", "go_to_sleep"]
       end
 
       post '/' do
