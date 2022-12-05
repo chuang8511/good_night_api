@@ -6,6 +6,7 @@ RSpec.describe Resource::V1::ClickInOperationApi, type: :request do
     before do
       allow(CommandService).to receive(:save_click_time).and_return(true)
       allow(Time).to receive(:now).and_return(Time.zone.parse('2022-12-01 14:00:00'))
+      allow(ValidationService).to receive(:error_messages).and_return("")
     end
 
     context 'no history data' do
@@ -101,6 +102,15 @@ RSpec.describe Resource::V1::ClickInOperationApi, type: :request do
 
       it_behaves_like 'return http_status_code', 400
       it_behaves_like 'return error_message', "click_type does not have a valid value"
+    end
+
+    context 'error_messages present' do
+      before do
+        allow(ValidationService).to receive(:error_messages).and_return("fake_error_message")
+        post '/good_night/v1/click_in/', :params => { user_id: 1, click_type: "wake_up" }
+      end
+      it_behaves_like 'return http_status_code', 400
+      it_behaves_like 'return error_message', "fake_error_message"
     end
 
   end
