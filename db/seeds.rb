@@ -5,5 +5,5 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-ClickInRecord.create(name: "fake_user_1")
-ClickInRecord.create(name: "fake_user_2")
+ClickInUser.create(name: "fake_user_1")
+ClickInUser.create(name: "fake_user_2")
